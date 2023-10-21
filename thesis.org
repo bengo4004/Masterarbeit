@@ -40,7 +40,7 @@ By answering the above questions this project contributes on the national level 
 \label{sec:Literature Review}
 ** Background of water abstraction taxes
 \label{sec: Background}
-Its importance has also been long identified by the European commision that provided a strategic framework in the European Water Framework Directive (WFD) already in 2000. But the implementation is conducted on the national level and not uncommonly even on the state level  as in Germany. Thus, initiatives have been characterized as somewhat slow and ineffective. The system differs considerably by country and partly even regions and display significant complexity [cite:@berbel_analysis_2019] (Berbel et al., 2019, p. 822 f.).
+Its importance has also been long identified by the European commision that provided a strategic framework in the European Water Framework Directive (WFD) already in 2000. But the implementation is conducted on the national level and not uncommonly even on the state level  as in Germany. Thus, initiatives have been characterized as somewhat slow and ineffective. The system differs considerably by country and partly even regions and display significant complexity (Berbel et al., 2019, p. 822 f.).
 
 The heterogeneity of policies is reflected in its differing implementation as a fee or tax scheme. Despite a clear conceptual difference between fee and tax instruments, we subsume comparable measures that address industrial groundwater water abstraction by the concept of taxes or fees identically to allow cross country/study effectiveness. This shall enable us to compare the German WAF to policies conducted elsewhere. 
 
@@ -69,7 +69,7 @@ For a sample of french firms Reynaud (2004) shows that the industrial water dema
 In their work analysing industrial firm data from 1994-1996, the author takes up the fact that water is entering the production process in diffrent ways. Therefore, the demand that is split up in parts that are covered through the utility provider (network), own water abstractions (autonomous) and water treatment before use.
 In their methodical approach firms minimize the occuring costs from these inputs. In this context Water abstraction fees are a strong determinant of autonomous water costs.  The work assumes a translog functional form of the cost funtion and specifies diffrent regression specifiactions (SUR & FGLS).
 The authors show that especially the part of the demand network water demand is sensitive to price changes but not so much the autonomous withdrawals.
-For water covered from utilities an increase in price by 10% is associated with a decrease of water consumption of 3% (-0.29). Abstraction water demand is elastic to production output but not so water price changes.
+For water covered from utilities an increase in price by 10'%' is associated with a decrease of water consumption of 3% (-0.29). Abstraction water demand is elastic to production output but not so water price changes.
 This is linked to the explanation that own abstraction are used for more important functions in the production process and are thus not easily substituted.
 These results indicate doubts about the effectiveness of a tax (fee) change on autonomous non-public abstractions that are of high relevancy in the german industrial context.[cite:@reynaud_econometric_2003]
 
@@ -84,12 +84,12 @@ Adding to this empirical estimate the author illustrates in a theoretical model 
 
 The evaluations of the WEE effectiveness in Germany have been mostly local, descriptive and obscured by interaction with other factors, e.g adoption of water-saving technologies in the energy production. Generally its potential in incentivizing water savings has been acknowledged. Hence,various papers have indicated that substitution effects are expected to be significant for German industrial water use. However , Literature fails to provide empirical estimations of such effects and establish clear causa relationships [cite:@umweltbundesamt_weiterentwicklung_2011; @lago_effluent_2015] (Möller-Gulland et al., 2015, p. 61; Umweltbundesamt, 2011, p. 120ff.). This is the gap that this work is trying to fill.
 
-** Data
+* Data
 To answer the posed questions the regional database  'Regionaldatenbank Deutschland' of the  German Statistical Offices  provides rich datasets on non-public water abstractions. This contains county-level observations by source and the number of companies registered for water abstraction.These are collected every three years starting in 2007 up until 2019. For this reason the analysis would beschränkenbe limited on this time period.
 If we consider the publication cycle datapoints for 2022 could become available within the course of the processing project or potentially worth a request and at the competent body.
 Data concerning on the existance and details of the water abstraction fee in every state will have to be collected from overview articles such as by the BUND.(Link: https://www.umweltbundesamt.de/sites/default/files/medien/1/dokumente/tabelle_wasserentnahmeentgelte_laender.pdf)
   
-** Methodology
+* Methodology
 For the cleaning and preparation, including the introduction of dummy-variables for WAE treatment, I would use functionalities from the tidyverse Package in R.
 To answer the reasearch question a Diffrence-in-Diffrence approach seems suitable. The control group would consist of observations for states that do not have any fee such as Bavaria, Hesse and Thuringia all else being treated.
 Increasing the complexity thereeinafter also a staggered-design could be introduced to account for states that adopted WAF in the course of the observational period such as Rhineland-Palatinate (2013), Saarland (2008) and Saxony-Anhalt (2011).
@@ -98,7 +98,7 @@ As a methodical contribution this work would provide a elasticity estimate in a 
 This would be implemented in Python via the functionalities allowing for Markov-Chain Monte Carlo sampling in the pymc3-package.  
 
 #+LATEX: \newpage
-** Timeline 
+* Timeline 
 
 Steps:
 *** DATA CLEANING
@@ -125,11 +125,12 @@ Scheduled Exams
 Revision
 
 #+LATEX: \newpage
-** Potential Risks
+* Potential Risks
 Not finding clear comparable fee heights and its changes over the period considered as Applications and exemptions are complex  : limit to analysis of Regelsätzen für Surface and Groundwater limit to one or the other - Low
 Not finding data on relevant confounders for specific timepoints
 Violations of important Assumptions in the Diff-in-Diff design : Running selection on observables in Baysian Framework with SAmpling mechanisms deals well with uncertainties regarding data generating process
 Having implementation issues with coding model in Python software: Not  experienced in Diff-in DIff Baysian regression.
+
 
 
 #+BIBLIOGRAPHY: references.bib

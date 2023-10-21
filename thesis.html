@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-10-13 Fri 15:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Research Proposal - Fall 2023</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Research Proposal - Fall 2023
+<br />
+<span class="subtitle">How do water abstraction fees affect non-public water abstraction in Germany?</span>
+</h1>
+<p>
+<b>SNR:</b> 2104562
+</p>
+
+<p>
+<b>ANR:</b> 639970
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1489232">Introduction &amp;  Motivation</a></li>
+<li><a href="#org68cf9e8">Literature Review</a>
+<ul>
+<li><a href="#org8fed0be">Background of water abstraction taxes</a></li>
+<li><a href="#org8404cdc">Non-public Groundwater consumption in Germany &amp; WEE design</a></li>
+<li><a href="#orga277e27">Effectiveness of relevant pricing policies</a></li>
+</ul>
+</li>
+<li><a href="#orgc62a36d">Data</a></li>
+<li><a href="#org9f82aca">Methodology</a></li>
+<li><a href="#orgd85dd71">Timeline</a></li>
+<li><a href="#org2478a46">Potential Risks</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1489232" class="outline-2">
+<h2 id="org1489232">Introduction &amp;  Motivation</h2>
+<div class="outline-text-2" id="text-org1489232">
+<p>
+\label{sec:intro & motivation}
+</p>
+
+<p>
+In the light of changing climatic conditions OECD and other actors have criticized national legislations of water tariffs as not promoting sufficient incentives to save water. The discussion of relevant measures includes non-pricing tools (e.g. household appliances such as meters) as well as direct pricing tools.On the EU level a general strategy is provided in the WFD but tariffs and taxes are made on a national level and thus vary widely. Recent implementations of relevant legislation in Italy, France and Portugal show that attention to water abstraction taxation has increased.(Berbel, Julio and Borrego-Marin, M. Mar and Exposito, Alfonso and Giannoccaro, Giacomo and Montilla-Lopez, Nazaret M. and Roseta-Palma, Catarina, 2019,  Leflaive, Xavier and Hjort, Marit, 2020)
+</p>
+
+<p>
+One example of a pricing instrument in the German context is the Water Abstraction Fee (WAF hereinafter, 'Wasserentnahmeentgelt'). The fee that features a history rich in changes and debates, in some cases for more than 25 year, is levied on water abstraction but its design vastly differs by state. They are not levied universally, rate heights differ and contain exemptions for many sectors. Nevertheless, Policy makers often highlight the ‘Steering effect’ 
+(zu deutsch ‘Lenkungswirkung’) of water consumption when judging the effectiveness of the instrument. However, the effect of this measure is somewhat unclear as efforts to investigate the impact on german water consumption, let alone the quantification of its size, have been very limited. As one state ( Rheinland-Pfalz) abolishes one of its exemptions to the industrial sector by 2024 it is of further interest how this inclusion might affect non-private water abstraction then.
+</p>
+
+<p>
+Numerous studies have investigated the elasticity of water demand to pricing measures especially for household and agriculture. It seems apparent that pricing measures directed at industrial water consumption are likely to be more effective in affecting demand than those aimed at household water consumption (Reynaud, Arnaud, 2003 : p.216) (Reynaud, 2003, p. 216). Therefore the impact analysis of this work focuses on the side of non-public water consumption.
+</p>
+
+<p>
+Thus, this works aims to answer the following questions:
+</p>
+
+<ol class="org-ol">
+<li>How have Water abstraction fees affected water abstraction in Germany?</li>
+<li>How large is the Effect?</li>
+<li>How does the effect differ for higher fee states compared to Low fee states? (High &gt; 0.10 cents/m<sup>3</sup> , Low &lt;0.10 cents)</li>
+<li>How is the abolition of the exemption for the industrial sector in the Rheinland-Pfalz going to affect non-private water consumption?</li>
+</ol>
+
+<p>
+By answering the above questions this project contributes on the national level in a better understanding of the WAF effectiveness to German policy makers (also on state-level). It also delivers a potential prospect for development in the state of Rheinland-Pfalz.Furthermore, International Policy might draw from its insights about the design of future policy instruments to foster a sustainable Umgang with water resources in their country. It may further provide ground for the public debate on how to deal with exemptions to certain economic actors. By taking a Baysian methodological approach it may also be able to capture well the inherent uncertainty of the water consumption, different from traditional frequentists taken so far.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org68cf9e8" class="outline-2">
+<h2 id="org68cf9e8">Literature Review</h2>
+<div class="outline-text-2" id="text-org68cf9e8">
+<p>
+\label{sec:Literature Review}
+</p>
+</div>
+<div id="outline-container-org8fed0be" class="outline-3">
+<h3 id="org8fed0be">Background of water abstraction taxes</h3>
+<div class="outline-text-3" id="text-org8fed0be">
+<p>
+\label{sec: Background}
+Its importance has also been long identified by the European commision that provided a strategic framework in the European Water Framework Directive (WFD) already in 2000. But the implementation is conducted on the national level and not uncommonly even on the state level  as in Germany. Thus, initiatives have been characterized as somewhat slow and ineffective. The system differs considerably by country and partly even regions and display significant complexity [<a href="@berbel_analysis_2019">@berbel_analysis_2019</a>] (Berbel et al., 2019, p. 822 f.).
+</p>
+
+<p>
+The heterogeneity of policies is reflected in its differing implementation as a fee or tax scheme. Despite a clear conceptual difference between fee and tax instruments, we subsume comparable measures that address industrial groundwater water abstraction by the concept of taxes or fees identically to allow cross country/study effectiveness. This shall enable us to compare the German WAF to policies conducted elsewhere. 
+</p>
+
+<p>
+Water abstraction taxes have been associated with a set of underlying objectives. They aim at recovering all occurring costs of water services while ensuring universal access while promoting the efficient usage of water resources.The orientation of this work is mainly towards the last (Montginoul, Marielle and Loubier, Sébastien and Barraqué, Bernard and Agenais, Anne-Laurence, 2015) (Montginoul et al., 2015, p. 142).
+</p>
+
+<p>
+The taxes design are differing according to factors influencing water resources such as climatic conditions, precipitation and surface and groundwater resources. It is common that commercial Water abstraction taxes are higher for groundwater than for surface water and higher in scarcer regions. Furthermore, a common theme to the system is a general non-applicability to agriculture. Even though France, Italy, and Portugal countries have systems in place that charge water abstraction by agriculture its taxation is still very low. Alongside Germany many countries/regions display substantial volumetric exemptions to agriculture which oftentimes effectively free the sector from any burden (Berbel, Julio and Borrego-Marin, M. Mar and Exposito, Alfonso and Giannoccaro, Giacomo and Montilla-Lopez, Nazaret M. and Roseta-Palma, Catarina, 2019). 
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8404cdc" class="outline-3">
+<h3 id="org8404cdc">Non-public Groundwater consumption in Germany &amp; WEE design</h3>
+<div class="outline-text-3" id="text-org8404cdc">
+<p>
+\label{sec: German WAF}
+It is common practice for companies of a certain size to operate their own extraction plants and thus cover their water needs themselves. Therefore, water consumption by companies is mainly covered under the non-public water supply. Overall non-public water abstraction has been decreasing steadily over the last 30 years. However groundwater is not heavily relied on by the industry or manufacturing sector for its water consumption. In 2016 11% were derived from groundwater compared to 86% of surface water. By contrast Groundwater is the main source of water abstraction in agriculture (76%). 
+Main abstractors of water for economic usage are electricity producers, mining companies and the manufacturing sector. Especially the adoption of water saving technologies to produce energy and increased costs of water service and disposal have been the main driver of the above mentioned reduction in overall water abstraction quantities (Umweltbundesamt, 2011,  Möller-Gulland, Jennifer and Lago, Manuel and {McGlade}, Katriona and Anzaldua, Gerardo, 2015) (Möller-Gulland et al., 2015, p. 61ff.; Umweltbundesamt, 2011, p. 122f.).
+</p>
+
+<p>
+The Wasserentnahmeentgelt is a water abstraction charge implemented in 13 out of 16 states associated to provide incentives for water savings. The design, amount and exemption regulations differ in each state, often considerably. Surface water abstraction is free of charge in Berlin, Hamburg and the state of Saarland.(p5ff)In the rest of the states values range from 0.1-5 Cents/m<sup>3.Groundwater</sup> charges vary a lot more then surface rates do and are generally higher, oftentimes threefold or more.The highest value can be found in Berlin were it is charged 31 Cents/m<sup>3</sup>. The lowest value is 0.25 C/<sup>m</sup><sup>3</sup> for fishing operations in Bremen and Sachsen-Anhalt. High values can be considered above 10 C/m<sup>3</sup>. Some fees were changed in height or completely abandoned such as in Baden-Würtemberg or Hessen. The section on variation in the treatment data will pick up on this fact.
+</p>
+
+<p>
+Different economic uses of water are priced differently when aggregated over states. In agriculture the mean groundwater charge is 8.25 C/m<sup>3</sup> the median lies at 3 C/m<sup>3</sup>. The mean rate for Bergbau is 12.26 C/m<sup>3</sup> while the corresponding median is found at 10C/m<sup>3</sup>. The mean rate applied to cooling purposes lies at 8.87 %. Companies abstracting drinking water have a mean rate of 10.32 cents (Do these reflect the costs of Water companies or industrial Food producers?).These values show that the distribution of charges applied is rightly-skewed for groundwater abstraction. This is most likely due the excessive rate of 31 Cents in Berlin that is applied to all of the three purposes.
+</p>
+
+<p>
+Exemptions for differing economic sectors are widespread but also vastly differ between states. Agriculture, Mining, and Hydropower creation are often in large parts exempted. The example of Rheinland-Pfalz is striking because it currently exempts large parts of industrial production. A tough stance is taken in the City-states Berlin und Hamburg that refrain from substantial exemptions. Furthermore, many state legislations allow exemptions for ecological measures such as groundwater remediation.Discounts are used by some states as an incentive mechanism to implement water management systems, up-to-date Technology or facilitate Circular water use ({BUND}, 2019).
+</p>
+
+<p>
+A more detailed consideration of these and also the use of funds that are often bound to ecological uses will be foregone at this point. Policy makers often associate the WEE with promoting efficient handling of water resources.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga277e27" class="outline-3">
+<h3 id="orga277e27">Effectiveness of relevant pricing policies</h3>
+<div class="outline-text-3" id="text-orga277e27">
+<p>
+\label{sec: Effectiveness of WAF}
+Many studies have investigated the effectiveness of price mechanisms to bring about water savings and derived connected elasticities. Scientific analysis has often estimated demand to be inelastic but dependent on the industry sector. Values range from -0.1 to -0.98 (Renzetti, Steven, 1992,  Olmstead, Sheila M., 2014)  (Olmstead, 2014, p. 502; Renzetti, 1992).
+</p>
+
+<p>
+For a sample of french firms Reynaud (2004) shows that the industrial water demand is inelastic and the part in particular covered by own abstractions is not responsive to price changes.
+In their work analysing industrial firm data from 1994-1996, the author takes up the fact that water is entering the production process in diffrent ways. Therefore, the demand that is split up in parts that are covered through the utility provider (network), own water abstractions (autonomous) and water treatment before use.
+In their methodical approach firms minimize the occuring costs from these inputs. In this context Water abstraction fees are a strong determinant of autonomous water costs.  The work assumes a translog functional form of the cost funtion and specifies diffrent regression specifiactions (SUR &amp; FGLS).
+The authors show that especially the part of the demand network water demand is sensitive to price changes but not so much the autonomous withdrawals.
+For water covered from utilities an increase in price by 10% is associated with a decrease of water consumption of 3% (-0.29). Abstraction water demand is elastic to production output but not so water price changes.
+This is linked to the explanation that own abstraction are used for more important functions in the production process and are thus not easily substituted.
+These results indicate doubts about the effectiveness of a tax (fee) change on autonomous non-public abstractions that are of high relevancy in the german industrial context.(Reynaud, Arnaud, 2003)
+</p>
+
+<p>
+In the Italian context Massaruto (Massarutto, Antonio, 2015) denies the effectiveness of an abstraction charge to bring about incentives to industrial water users. Montignoul et al. (Montginoul, Marielle and Loubier, Sébastien and Barraqué, Bernard and Agenais, Anne-Laurence, 2015) (2015) investigates for France how water savings could be facilitated and finds the effect of raising water fees to be limited in its Incentive effect to save water. For Industries in France he notes that water consumption in fact declined by over 1.5km<sup>3</sup>/year when a water disposal charge was invoked. However, this cannot be causally attributed to the tax, as fundamental changes in the tariff structure were carried out in parallel.(2015, p. 157 ff.)
+Thus, these results indicate doubts about the effectiveness of water abstraction charges as an efficient measure to incentivize water savings.
+</p>
+
+<p>
+However, some late results might indicate that the effectiveness of a tax is higher than previously thought. In their US study Burlig et al. find indications for a more elastic demand in the farming context in California. In their research they use electricity costs of pumps as an Instrumental Variable to estimate the causal effect of groundwater water price on demand. They estimate an elasticity of -1.12 which is far more elastic then estimates of earlier studies. Their results point towards a bigger potential of such a tax to promote water conservation.(Burlig, Fiona and Preonas, Louis and Woerman, Matt, 2021) (p3)
+</p>
+
+<p>
+A recent tax reform in China has also likely contributed to increasing groundwater efficiency for industrial water users; these savings seem to be driven by a substitution mechanism. 
+Ouyandg et al.(Ouyang, Rulin and Mu, Enlin and Yu, Yibin and Chen, Ying and Hu, Jiangbo and Tong, Haoran and Cheng, Zhe, 2022) investigate the effectiveness of a recent reform that replaced the existing fee-based for mandatory tax-based charging system. As the WEE in Germany the applied tax rate varies considerably depending on the region and its characteristics. Based on data from 10 provinces where the reform was rolled out, they quantify a short-term 9% reduction in groundwater use. This effect is bound to regions that were overexploiting existing resources and thus received higher tax rates.  Due to the insufficient available data and thus a less robust research design, this estimate is limited in their exact causal interpretation and rather qualitative in nature. 
+Adding to this empirical estimate the author illustrates in a theoretical model the two mechanisms how a tax can facilitate savings. A higher tax directly reduces total demand for water by lowering agents purchasing power, referred to as the scale effect, or it fosters substitution, consumers switching to cheaper sources of water. Both effects should negatively impact groundwater abstraction. Based on field work the authors derive that Industrial agents are among the most impacted by the reform and substitution effect are in fact pronounced while scale effects seem of minor importance. Further the authors identify that the reform also contributed to fair competition in the market and incentivized efficient use also by exemptions for recycled water usage. Despite the qualitative nature of the study results, these highlight an existing potential for pricing measures in bringing about water savings , especially for economic water users.
+</p>
+
+<p>
+The evaluations of the WEE effectiveness in Germany have been mostly local, descriptive and obscured by interaction with other factors, e.g adoption of water-saving technologies in the energy production. Generally its potential in incentivizing water savings has been acknowledged. Hence,various papers have indicated that substitution effects are expected to be significant for German industrial water use. However , Literature fails to provide empirical estimations of such effects and establish clear causa relationships (Umweltbundesamt, 2011,  Möller-Gulland, Jennifer and Lago, Manuel and {McGlade}, Katriona and Anzaldua, Gerardo, 2015) (Möller-Gulland et al., 2015, p. 61; Umweltbundesamt, 2011, p. 120ff.). This is the gap that this work is trying to fill.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc62a36d" class="outline-2">
+<h2 id="orgc62a36d">Data</h2>
+<div class="outline-text-2" id="text-orgc62a36d">
+<p>
+To answer the posed questions the regional database  'Regionaldatenbank Deutschland' of the  German Statistical Offices  provides rich datasets on non-public water abstractions. This contains county-level observations by source and the number of companies registered for water abstraction.These are collected every three years starting in 2007 up until 2019. For this reason the analysis would beschränkenbe limited on this time period.
+If we consider the publication cycle datapoints for 2022 could become available within the course of the processing project or potentially worth a request and at the competent body.
+Data concerning on the existance and details of the water abstraction fee in every state will have to be collected from overview articles such as by the BUND.(Link: <a href="https://www.umweltbundesamt.de/sites/default/files/medien/1/dokumente/tabelle_wasserentnahmeentgelte_laender.pdf">https://www.umweltbundesamt.de/sites/default/files/medien/1/dokumente/tabelle_wasserentnahmeentgelte_laender.pdf</a>)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9f82aca" class="outline-2">
+<h2 id="org9f82aca">Methodology</h2>
+<div class="outline-text-2" id="text-org9f82aca">
+<p>
+For the cleaning and preparation, including the introduction of dummy-variables for WAE treatment, I would use functionalities from the tidyverse Package in R.
+To answer the reasearch question a Diffrence-in-Diffrence approach seems suitable. The control group would consist of observations for states that do not have any fee such as Bavaria, Hesse and Thuringia all else being treated.
+Increasing the complexity thereeinafter also a staggered-design could be introduced to account for states that adopted WAF in the course of the observational period such as Rhineland-Palatinate (2013), Saarland (2008) and Saxony-Anhalt (2011).
+To assess the question of treatment heterogeneity, diffrent rates could be classified in a low and high group following a reasonable threshold, e.g. of 10 Cents/m<sup>3</sup> ({BUND}, 2019), and tested in a corresponding specification.
+As a methodical contribution this work would provide a elasticity estimate in a Baysian linear regression which differs from common frequentists estimates.
+This would be implemented in Python via the functionalities allowing for Markov-Chain Monte Carlo sampling in the pymc3-package.  
+</p>
+</div>
+</div>
+<div id="outline-container-orgd85dd71" class="outline-2">
+<h2 id="orgd85dd71">Timeline</h2>
+<div class="outline-text-2" id="text-orgd85dd71">
+<p>
+Steps:
+</p>
+</div>
+<div id="outline-container-orgdc4f1ce" class="outline-4">
+<h4 id="orgdc4f1ce">DATA CLEANING</h4>
+<div class="outline-text-4" id="text-orgdc4f1ce">
+<p>
+Download Water consumption data (Statistical Offices)
+Preparation of WAF data: Introduction of dummy,WAF height (rate and low/high) and exemptions columns
+Identify Data on changes in WAF for every state
+Identify Data on Counfing Variables such as Political, Economical and Hydrological Situation
+Merge diffrent data sets
+</p>
+</div>
+</div>
+<div id="outline-container-orgba0ea01" class="outline-4">
+<h4 id="orgba0ea01">Analysis</h4>
+<div class="outline-text-4" id="text-orgba0ea01">
+<p>
+Calculation of descriptive Statistics
+Estimation of Baysian Model
+Implement Relevant Robustness checks
+Design relevant Data Visualizations 
+</p>
+</div>
+</div>
+<div id="outline-container-org63b592c" class="outline-4">
+<h4 id="org63b592c">Writing Process</h4>
+<div class="outline-text-4" id="text-org63b592c">
+<p>
+Write Abstract
+Write Intro &amp; Literature review
+Write Data and Methods
+Write Results: Naive model specifications, Treatment Heterogeneity, Robustness checks
+Writ Discussion &amp; Conclusion
+</p>
+
+<p>
+Working on Task
+Supervisor Meetings
+Scheduled Exams
+Revision
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2478a46" class="outline-2">
+<h2 id="org2478a46">Potential Risks</h2>
+<div class="outline-text-2" id="text-org2478a46">
+<p>
+Not finding clear comparable fee heights and its changes over the period considered as Applications and exemptions are complex  : limit to analysis of Regelsätzen für Surface and Groundwater limit to one or the other - Low
+Not finding data on relevant confounders for specific timepoints
+Violations of important Assumptions in the Diff-in-Diff design : Running selection on observables in Baysian Framework with SAmpling mechanisms deals well with uncertainties regarding data generating process
+Having implementation issues with coding model in Python software: Not  experienced in Diff-in DIff Baysian regression.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2023-10-13 Fri 15:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
