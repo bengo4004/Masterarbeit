@@ -1,0 +1,611 @@
+#+PROPERTY: header-args  :session market :kernel python3 :async yes
+* The market
+
+#+begin_src jupyter-python
+import numpy as np
+import pandas as pd
+import pymc3 as pm
+import tensorflow as tf
+import scipy as sp
+import matplotlib.pyplot as plt
+import wbdata as wb
+#+end_src
+
+#+RESULTS:
+
+
+
+
+
+** Why do we love the market?
+
+*** welfare
+
+
+50 consumers and 10 goods: who should get a product? Each consumer wants at max. one unit of the good. Utility without the good is normalized at 0.
+
+A number of ways in which we can generate valuations for the 50 consumers.
+
+
+#+begin_src jupyter-python 
+np.arange(0,100,2)
+#+end_src
+
+#+RESULTS:
+: 50
+
+#+begin_src jupyter-python 
+np.linspace(0,98,50)
+#+end_src
+
+#+RESULTS:
+: array([ 0.,  2.,  4.,  6.,  8., 10., 12., 14., 16., 18., 20., 22., 24.,
+:        26., 28., 30., 32., 34., 36., 38., 40., 42., 44., 46., 48., 50.,
+:        52., 54., 56., 58., 60., 62., 64., 66., 68., 70., 72., 74., 76.,
+:        78., 80., 82., 84., 86., 88., 90., 92., 94., 96., 98.])
+
+#+begin_src jupyter-python
+np.random.normal(10,2,50)
+#+end_src
+
+#+RESULTS:
+: array([14.5858507 , 10.97904085, 13.59322065,  8.68674145, 11.43841535,
+:        12.57724556, 10.04637035,  8.68976845,  9.77073257, 11.67459033,
+:        13.97496477,  9.56004743,  9.23951682, 10.67255223,  6.42089847,
+:         8.1425343 , 10.19370376,  9.13543518,  8.3415859 , 11.4574482 ,
+:         4.88414373, 10.83403654, 11.37866135, 12.23595134, 10.32591794,
+:        12.77081509,  8.66733947, 10.92960867,  9.61076152,  8.69852313,
+:         6.73685208,  6.61209815, 11.22701681, 12.11463366, 11.48343344,
+:        11.79616987,  8.72013062,  9.61628185, 14.2636026 , 12.51859584,
+:         9.05291314, 10.09632126, 11.5091784 ,  9.96076112, 11.12262296,
+:         9.73061302,  8.54571467, 12.91015207,  5.83277747,  5.29163159])
+
+#+begin_src jupyter-python
+sp.stats.norm.rvs(10,2,50)
+#+end_src
+
+#+RESULTS:
+: array([11.11993008, 10.2202585 ,  9.29601908,  9.13160063,  8.6608515 ,
+:         7.6446125 , 10.11720924,  9.90664686, 10.10518788,  6.11419275,
+:        12.90522323,  7.62598841, 11.92536181, 11.79802792,  8.29333509,
+:        11.24172841, 10.81406485, 11.14030411,  6.84559438, 12.19642521,
+:        11.52860396, 11.40468023,  8.68923757, 10.14437748,  9.29068078,
+:         6.07279969,  8.25004399,  9.34371771,  9.55435859, 10.34397668,
+:         9.56589841,  9.1069686 , 13.13673562,  9.05586581,  9.02509767,
+:         8.68920447,  6.62318482, 11.53087669,  9.67592016,  9.88904874,
+:        11.62083015, 12.52277226, 10.24901367,  8.01940897, 12.48247956,
+:        12.15736739,  7.21729985, 10.37328597, 11.72795264,  8.83899993])
+
+#+begin_src jupyter-python
+pm.Normal.dist(10,2).random(size=50)
+#+end_src
+
+#+RESULTS:
+: array([ 8.04504198, 10.60887155, 10.77583327, 13.00584439, 11.20348242,
+:         8.42819104, 13.34183206,  5.84358935,  7.83580855,  8.78817083,
+:         7.50420907, 10.10406413, 12.78152164,  9.23814774, 11.81962756,
+:        10.55593357, 13.75489848, 11.30345744, 10.61790207,  9.04548704,
+:        13.8054843 ,  8.84351988, 11.11743615, 11.37352094,  9.37553158,
+:         8.91939146,  9.29776187, 11.87547224,  9.92308599,  9.83209148,
+:         9.45052686, 10.78393724,  9.06555106, 12.57639723,  9.16153632,
+:         7.6910587 ,  9.58396742, 10.07443685,  9.64803318, 11.88732855,
+:        11.21050542, 10.58585901,  9.38429368,  6.92914214,  9.22477128,
+:         9.36551739, 16.10013221,  9.13953276,  8.5399228 , 10.67816868])
+
+#+begin_src jupyter-python 
+valuations = tf.random.normal([50],10,2).numpy()
+#+end_src
+
+#+RESULTS:
+
+
+*Calculate the max. welfare that can be generated with the 10 goods*
+
+#+begin_src jupyter-python
+valuations = np.array(sorted(valuations,reverse=True))
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+valuations
+#+end_src
+
+#+RESULTS:
+#+begin_example
+array([12.883782 , 12.625912 , 12.183687 , 12.130137 , 11.884291 ,
+       11.85166  , 11.845938 , 11.656345 , 11.413893 , 11.2542515,
+       11.139926 , 11.1041975, 10.912091 , 10.833175 , 10.811467 ,
+       10.579187 , 10.509206 , 10.348803 , 10.167879 , 10.121491 ,
+       10.118737 , 10.017363 , 10.005825 ,  9.964104 ,  9.963797 ,
+        9.949461 ,  9.904644 ,  9.838599 ,  9.48543  ,  9.344425 ,
+        9.315039 ,  9.265544 ,  9.067844 ,  9.056361 ,  8.327326 ,
+        8.176089 ,  8.055132 ,  8.053061 ,  7.9753284,  7.8771667,
+        7.697397 ,  7.5444345,  7.533734 ,  7.522788 ,  7.344989 ,
+        6.944785 ,  6.507304 ,  6.376832 ,  6.325959 ,  6.273287 ],
+      dtype=float32)
+#+end_example
+
+We have 10 units of the product.
+
+#+begin_src jupyter-python
+utility_realized = valuations[:10]
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python 
+len(utility_realized)
+#+end_src
+
+#+RESULTS:
+: 10
+
+#+begin_src jupyter-python 
+welfare = np.sum(utility_realized)
+print("welfare equals {:.2f}".format(welfare))
+#+end_src
+
+#+RESULTS:
+: welfare equals 119.73
+
+
+*** market outcome
+
+The fun thing is: the market can generate this outcome!
+
+*Write a python function that gives us demand at each price $p$*
+
+#+begin_src jupyter-python
+def demand(p):
+    return np.sum(valuations>p)
+
+demand(20)
+#+end_src
+
+#+RESULTS:
+: 0
+
+*Define a function =excess_demand= with variables $p$ and =supply=*
+
+Then we are going to solve for the equilibrium: excess demand equals 0.
+
+#+begin_src jupyter-python
+def excess_demand(p,supply):
+    return demand(p)-supply
+
+#+end_src
+
+#+RESULTS:
+
+When do we have an equilibrium price?
+- excess demand equals 0
+
+Equilibrium is important for economists
+- in your final assignment you need to calculate an equilibrium
+
+
+How solvers work?
+- on white board draw $y = x^2 - 4$
+- starting point determines which solution you are going to find
+- show that there is a problem with starting point $x=0$.
+
+
+#+begin_src jupyter-python
+range_x = np.linspace(-2,2,20)
+
+def my_fun(x):
+  return x**2 - 1
+
+plt.plot(range_x,my_fun(range_x))
+plt.hlines(0,-2,2,color='k');
+
+#+end_src
+
+#+RESULTS:
+[[file:./.ob-jupyter/3be9eb8fe371c704a11b0a780af0d55d18d095f6.png]]
+
+
+#+begin_src jupyter-python
+sp.optimize.fsolve(my_fun,2)
+#+end_src
+
+#+RESULTS:
+: array([1.])
+
+
+#+begin_src jupyter-python
+sp.optimize.fsolve(my_fun,-10)
+#+end_src
+
+#+RESULTS:
+: array([-1.])
+
+#+begin_src jupyter-python
+sp.optimize.fsolve(my_fun,0)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: /home/janboone/anaconda3/lib/python3.8/site-packages/scipy/optimize/_minpack_py.py:178: RuntimeWarning: The iteration is not making good progress, as measured by the 
+:   improvement from the last ten iterations.
+:   warnings.warn(msg, RuntimeWarning)
+: array([0.])
+:END:
+
+
+
+*Now apply this to =excess_demand=*
+- problem: what to do with extra parameter =supply=?
+
+
+#+begin_src jupyter-python 
+price = sp.optimize.fsolve(lambda p: excess_demand(p,10),12)
+print(price)
+print(excess_demand(11.2,10))
+#+end_src
+
+#+RESULTS:
+: [11.17287447]
+: 0
+
+#+begin_src jupyter-python
+range_p = np.arange(0,15,0.1)
+plt.plot([demand(p) for p in range_p],range_p,'o')
+plt.vlines(10,0,15)
+plt.xlabel('quantity')
+plt.ylabel('price')
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: Text(0, 0.5, 'price')
+[[file:./.ob-jupyter/25a4926d1131cc464e07db7881f32e2569e1dfd3.png]]
+:END:
+
+*Calculate total welfare as generated by the market and compare to max. welfare above*
+
+#+begin_src jupyter-python 
+market_welfare = np.sum(valuations[valuations>price])
+print("welfare in market equals {:.2f}".format(market_welfare))
+print("max. possible welfare equals {:.2f}".format(welfare))
+#+end_src
+
+#+RESULTS:
+: welfare in market equals 119.73
+: max. possible welfare equals 119.73
+
+
+*** income distribution
+
+One of the reasons that people do not like the market is income inequality.
+
+*How can we add income inequality to our model?*
+
+#+begin_src jupyter-python 
+valuations = tf.random.normal([50],10,2).numpy()
+incomes = tf.random.normal([50],8,2).numpy()
+#+end_src
+
+#+RESULTS:
+
+*Define a new demand function that takes both valuations and income into account*
+
+
+#+begin_src jupyter-python
+def afford(p):
+    return incomes>p
+
+def wtp(p):
+    return valuations > p
+
+def demand_2(p):
+    return np.sum(afford(p)*wtp(p))
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+afford(10)
+#+end_src
+
+
+
+#+RESULTS:
+: array([False, False, False, False, False, False, False, False, False,
+:        False, False, False, False, False, False, False, False, False,
+:        False, False, False, False, False, False, False, False, False,
+:         True, False, False, False, False, False, False, False, False,
+:        False, False, False, False, False, False, False, False,  True,
+:        False, False, False, False, False])
+
+
+- willingness to pay is always (weakly) higher than demand because not everyone can afford her willingness to pay
+- in the figure: people have wtp up to 14, but no one can afford $p>11$
+
+#+begin_src jupyter-python 
+range_p = np.arange(15)
+plt.plot([np.sum(wtp(p)) for p in range_p],range_p,label='wtp')
+plt.plot([demand_2(p) for p in range_p],range_p,label='demand')
+plt.legend()
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.legend.Legend at 0x7f3e07456910>
+[[file:./.ob-jupyter/bc10e5aada6b2d68143953a730045de12dda2378.png]]
+:END:
+
+*Define excess demand and calculate the equilibrium price*
+- why is equilibrium price lower than before?
+- (some people can no longer afford the "old" equil. price and hence there is excess supply at this price)
+
+#+begin_src jupyter-python 
+def excess_demand_2(p):
+    return demand_2(p)-10
+price_2 = sp.optimize.fsolve(excess_demand_2,10)
+price_2
+#+end_src
+
+#+RESULTS:
+: array([8.4922214])
+
+
+*Compare welfare generated in the market with the max. welfare that is possible*
+- when taking income inequality into account, the market no longer generates max. welfare
+- income redistribution can have efficiency effects in this set-up
+- notebook also considers other market failures
+
+#+begin_src jupyter-python 
+welfare_2 = np.sum(valuations*afford(price_2)*wtp(price_2))
+welfare_2
+#+end_src
+
+#+RESULTS:
+: 111.17668
+
+#+begin_src jupyter-python 
+welfare
+#+end_src
+
+#+RESULTS:
+: 119.7299
+
+
+* Cournot
+
+Write on whiteboard:
+- $p(Q)=1-Q,c(q) = c*q$
+- $q_i = \arg\max_{x} (1-x-\sum_{j \neq i} q_j -c)x$
+- $Q_{other} = \sum_{j \ne i} q_j$
+- we can program this reaction function using =fminbound= because we know that optimal output will lie between 0 and 1
+- python cannot maximize: minimize $-f$
+
+#+begin_src jupyter-python 
+def reaction(Q_other,c):
+    return sp.optimize.fminbound(lambda x: -x*(1-Q_other-x-c),0,1,full_output=1)[0]
+#+end_src
+
+#+RESULTS:
+
+
+----------------
+*How do optimizers work?*
+
+#+begin_src jupyter-python :display plain
+def my_fun(x):
+  return x**2 + 5
+#+end_src
+
+#+RESULTS:
+
+output:
+- optimal value for x
+- f at optimal value for x
+- error flag: o means converged
+- number of function calls made
+
+#+begin_src jupyter-python :display plain
+sp.optimize.fminbound(my_fun, -10,10,full_output=1)
+#+end_src
+
+#+RESULTS:
+| 0.0 | 5.0 | 0 | 6 |
+
+Most optimizers do not understand difference between local and global optimum
+- explain how minimizer works with slope and next point "moving to the left" if slope > 0 etc.
+
+other solver
+#+begin_src jupyter-python :display plain
+sp.optimize.minimize(my_fun,5)
+#+end_src
+
+#+RESULTS:
+:   message: Optimization terminated successfully.
+:   success: True
+:    status: 0
+:       fun: 5.000000000000001
+:         x: [-2.630e-08]
+:       nit: 3
+:       jac: [-5.960e-08]
+:  hess_inv: [[ 5.000e-01]]
+:      nfev: 8
+:      njev: 4
+
+*How do I get just the value for x?*
+
+#+begin_src jupyter-python :display plain
+sp.optimize.minimize(my_fun,5).x
+#+end_src
+
+#+RESULTS:
+: array([-2.62955131e-08])
+
+--------
+
+
+- first plot without the labels
+- when $q_1 = 0$, firm 2 is monopolist: optimal $q_2$ equals monop. output $0.5$
+- when $q_2 = 0$, firm 1 optimally produces $0.5$
+
+#+begin_src jupyter-python 
+range_q = np.arange(0,0.6,0.1)
+plt.plot(range_q,[reaction(q,0) for q in range_q],label='reaction function firm 2')
+plt.plot([reaction(q,0) for q in range_q],range_q,label='reaction function firm 1')
+plt.xlabel('$q_1$')
+plt.ylabel('$q_2$')
+plt.legend();
+#+end_src
+
+#+RESULTS:
+[[file:./.ob-jupyter/ac8e347287ba2376516ac04dbfae8bfc63370e20.png]]
+
+- equilibrium in this context implies that each firm produces output equal to the optimal reaction to opponent's output level
+- Nash equilibrium: each player chooses optimal response to other player's choice
+- fixed point: $x=f(x)$ or $x-f(x)=0$.
+
+#+begin_src jupyter-python 
+def fixed_point(q,c):
+    return [q[0] - reaction(q[1],c[0]),
+            q[1] - reaction(q[0],c[1])]
+
+sp.optimize.fsolve(lambda x: fixed_point(x,[0,0]),[0,0])
+#+end_src
+
+#+RESULTS:
+: array([0.33333333, 0.33333333])
+
+* pandas
+
+- another useful strategy for  your final assignment:
+- when using simulations (here solve for equil. price for different cost levels)
+- use pandas dataframe to store the results
+
+
+#+begin_src jupyter-python 
+costs = tf.random.normal([50,2],0.2,0.05).numpy()
+q = np.array([sp.optimize.fsolve(lambda x: fixed_point(x,costs[i]),[0,0]) for i in range(50)])
+q.shape
+#+end_src
+
+#+RESULTS:
+| 50 | 2 |
+
+- what is the following?
+- for the first draw of cost levels (index 0) =q[0]= gives equil. output levels of firms 1 and 2
+
+#+begin_src jupyter-python 
+q[0]
+#+end_src
+
+#+RESULTS:
+: array([0.29789826, 0.24777492])
+
+*Create a dataframe with columns =c1,c2,q1,q2=*
+
+
+#+begin_src jupyter-python :display plain
+df = pd.DataFrame({'c1': costs[:,0], 'c2': costs[:,1], 'q1': q[:,0], 'q2': q[:,1]})
+df.head()
+#+end_src
+
+#+RESULTS:
+:          c1        c2        q1        q2
+: 0  0.156429  0.206552  0.297898  0.247775
+: 1  0.185086  0.180875  0.270234  0.274445
+: 2  0.172272  0.176772  0.277409  0.272909
+: 3  0.224016  0.256565  0.269511  0.236962
+: 4  0.074981  0.112714  0.320917  0.283185
+
+*Add column total output to the dataframe*
+
+#+begin_src jupyter-python :display plain
+df['Q'] = df.q1 + df['q2']
+
+df.head()
+#+end_src
+
+#+RESULTS:
+:          c1        c2        q1        q2         Q
+: 0  0.156429  0.206552  0.297898  0.247775  0.545673
+: 1  0.185086  0.180875  0.270234  0.274445  0.544680
+: 2  0.172272  0.176772  0.277409  0.272909  0.550319
+: 3  0.224016  0.256565  0.269511  0.236962  0.506473
+: 4  0.074981  0.112714  0.320917  0.283185  0.604102
+
+*Add Herfindahl index to the dataframe*
+- $H = \sum_i ms_i^2$
+
+
+#+begin_src jupyter-python
+df['H'] = (df.q1/df.Q)**2 + (df.q2/df.Q)**2
+#+end_src
+
+#+RESULTS:
+
+*Plot the relation between total output and the Herfindahl index*
+
+#+begin_src jupyter-python 
+plt.plot(df.Q,df.H,'o');
+#+end_src
+
+#+RESULTS:
+[[file:./.ob-jupyter/fd9eabbb39c5e67dc20fcef69729d611e81ef5da.png]]
+
+
+
+
+
+* Cournot vectorized
+
+- above we assumed that there were two firms
+- how can we formulate  this without imposing 2 firms?
+
+
+#+begin_src jupyter-python 
+def q_to_Q_other(q): # q is output vector for all firms
+    length = len(q)  # we want vector with Q_other for each of the firms
+    return np.array([np.sum(q[np.arange(length) != i]) for i in np.arange(length)])
+
+def reaction(q,c):
+    Q_other = q_to_Q_other(q)
+    qstar = [sp.optimize.fminbound(lambda x: -x*(1-x-Q_other[i] - c[i]),0,1,full_output=1)[0] for i in range(len(q))]
+    return qstar
+
+def fixed_point(q,c):
+    return q - reaction(q,c)
+
+def solution(c):
+    return sp.optimize.fsolve(lambda x: fixed_point(x,c),np.zeros_like(c))
+
+costs = tf.random.normal([3,50],0.15,0.05).numpy()
+
+solutions = [np.sum(solution(costs[:,i])) for i in range(50)]
+solutions
+#+end_src
+
+
+
+#+begin_src jupyter-python 
+np.zeros_like(costs)
+
+#+end_src
+
+
+=np.array([np.sum(q[np.arange(length) ! = i]) for i in np.arange(length)])=
+
+
+#+begin_src jupyter-python
+i = 3
+mask = np.arange(6) != i
+print(mask)
+print(np.arange(6)[mask])
+print(np.sum(np.arange(6)[mask]))
+#+end_src
+
+#+RESULTS:
+: [ True  True  True False  True  True]
+: [0 1 2 4 5]
+: 12
+
+

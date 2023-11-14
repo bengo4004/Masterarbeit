@@ -1,0 +1,332 @@
+* Heading 1
+This is some text
+This is an [[https://www.youtube.com/watch?v=VcgjTEa0kU4][important link]] (org-insert-link)
+
+** Reorder sections
+alt + up/down
+
+** Heading 1.2
+
+C+ENt = new header
+*M+Ent* = new header direct after
+
+** Insert tables
+    | Name  | Age | Uses Emacs |
+    |-------+-----+------------|
+    | DAvid |  31 |          1 |
+    | Alex  |  33 |            |
+    |       |     |            |
+
+** List
+- First item 
+- Second item: alt+M
+- Third item
+
+  - [] First checklist
+
+  
+** Source blocks
+
+#+begin_src emacs-lisp
+
+#+end_src
+
+** DONE My todo
+org-todo
+
+** 
+
+* Heading 3
+
+
+#+PROPERTY: header-args  :session market :kernel python3 :async yes
+#+begin_src emacs-lisp
+(use-package eglot)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package corfu)
+(setq corfu-auto-delay 1.0)
+(setq corfu-history-mode nil)
+(setq corfu-preview-current t)
+(setq corfu-auto t)
+(global-corfu-mode 1)
+(define-key corfu-map (kbd "C-j") corfu-next)
+(define-key corfu-map (kbd "C-k") corfu-previous)
+(define-key corfu-map (kbd "C-q") corfu-quit)
+(define-key corfu-map (kbd "C-l") corfu-complete)
+#+end_src
+
+'<py+TAB'
+'<jp + TAB'
+avaluate code block: C-c C-c
+#+begin_src python name1 = 'blabla'
+  result =1+1
+  return result
+#+end_src
+
+#+RESULTS:
+: 2
+
+
+#+begin_src python
+  import pandas as pd
+  import numpy as np
+  df = pd.read_excel('Regiodaten.xlsx', skiprows=4)
+  return(df.head())
+  #+end_src
+
+#+RESULTS:
+: /var/folders/4g/3cc88x050nbdhc3rv9w9r2mh0000gn/T/babel-iH1UGF/python-6tbBvd
+
+#+begin_src python
+  import pandas as pd
+  import numpy as np
+#+end_src
+
+#+RESULTS:
+: None
+
+#+begin_src python
+  df = pd.read_excel('Regiodaten.xlsx', skiprows=4)
+  return(df.head())
+#+end_src
+
+#+RESULTS:
+
+# How can I GET THE SESSION TO WORK
+
+#+begin_src jupyter-python
+import pandas as pd
+import numpy as np
+#+end_src
+
+#+RESULTS:
+
+
+
+#+begin_src jupyter-python
+pd.he
+#+end_src
+
+
+#+begin_src jupyter-python :results value table
+df_jp = pd.read_excel('Regiodaten.xlsx', skiprows=4, engine ='openpyxl')
+df_jp.head(10)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: /Applications/anaconda3/lib/python3.10/site-packages/openpyxl/styles/stylesheet.py:226: UserWarning: Workbook contains no default style, apply openpyxl's default
+:   warn("Workbook contains no default style, apply openpyxl's default")
+#+begin_export html
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Unnamed: 1</th>
+      <th>Unnamed: 2</th>
+      <th>Grundwasser</th>
+      <th>Quellwasser</th>
+      <th>Uferfiltrat</th>
+      <th>angereichertes Grundwasser</th>
+      <th>See- und Talsperrenwasser</th>
+      <th>Flusswasser</th>
+      <th>Meer- und Brackwasser</th>
+      <th>andere Wasserarten</th>
+      <th>Unnamed: 11</th>
+      <th>Unnamed: 12</th>
+      <th>Unnamed: 13</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>1000 cbm</td>
+      <td>Anzahl</td>
+      <td>Anzahl</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>DG</td>
+      <td>Deutschland</td>
+      <td>15317952</td>
+      <td>2223677</td>
+      <td>47552</td>
+      <td>423603</td>
+      <td>130261</td>
+      <td>358217</td>
+      <td>11917232</td>
+      <td>171400</td>
+      <td>46010</td>
+      <td>2135950</td>
+      <td>10677</td>
+      <td>11554</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>01</td>
+      <td>Schleswig-Holstein</td>
+      <td>2037121</td>
+      <td>27050</td>
+      <td>827</td>
+      <td>.</td>
+      <td>.</td>
+      <td>3666</td>
+      <td>1939057</td>
+      <td>57779</td>
+      <td>531</td>
+      <td>31141</td>
+      <td>512</td>
+      <td>394</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>01051</td>
+      <td>Dithmarschen, Kreis</td>
+      <td>36899</td>
+      <td>8262</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>.</td>
+      <td>.</td>
+      <td>-</td>
+      <td>.</td>
+      <td>9636</td>
+      <td>21</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>01001</td>
+      <td>Flensburg, kreisfreie Stadt</td>
+      <td>9601</td>
+      <td>1469</td>
+      <td>.</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>.</td>
+      <td>-</td>
+      <td>274</td>
+      <td>6</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>01053</td>
+      <td>Herzogtum Lauenburg, Kreis</td>
+      <td>8511</td>
+      <td>2189</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>.</td>
+      <td>.</td>
+      <td>-</td>
+      <td>106</td>
+      <td>1542</td>
+      <td>85</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>01002</td>
+      <td>Kiel, kreisfreie Stadt</td>
+      <td>50059</td>
+      <td>417</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>.</td>
+      <td>-</td>
+      <td>1066</td>
+      <td>11</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>01003</td>
+      <td>Lübeck, kreisfreie Stadt, Hansestadt</td>
+      <td>324</td>
+      <td>289</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>.</td>
+      <td>4213</td>
+      <td>13</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>01004</td>
+      <td>Neumünster, kreisfreie Stadt</td>
+      <td>150</td>
+      <td>128</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>.</td>
+      <td>367</td>
+      <td>9</td>
+      <td>13</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+#+end_export
+:END:
